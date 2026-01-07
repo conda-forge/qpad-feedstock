@@ -26,7 +26,7 @@ make PREFIX="${PREFIX}" \
   CC_OPTS="${CC_OPTS}" \
   LDF="${LDF}"
 
-cp -v ./bin/qpad.e "${PREFIX}/bin/qpad.e"
+cp -v ./source/build/qpad.e "${PREFIX}/bin/qpad.e"
 
 # Build openPMD-enabled binary
 make clean
@@ -36,5 +36,5 @@ make PREFIX="${PREFIX}" IF_OPENPMD=1 \
   CC_OPTS="${CC_OPTS}" \
   LDF="${LDF}"
 
-cp -v ./bin/qpad.e "${PREFIX}/bin/qpad-pmd.e"
+cp -v ./source/build/qpad.e "${PREFIX}/bin/qpad-pmd.e"
 
