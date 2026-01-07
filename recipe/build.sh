@@ -13,11 +13,12 @@ FC=mpifort
 CC=mpicc
 
 # Use conda flags
-FC_OPTS="-O3 -fdefault-real-8 -fdefault-double-8 -fopenmp -ffree-form"
-CC_OPTS="-O -std=c99"
+FC_OPTS="${FFLAGS} -fdefault-real-8 -fdefault-double-8 -fopenmp -ffree-form"
+CC_OPTS="${CFLAGS} -std=c99"
+
 
 # Libraries
-LDF="-L${PREFIX}/lib -lHYPRE -ljsonfortran -lhdf5hl_fortran -lhdf5_fortran -lhdf5_hl -lhdf5 -lz"
+LDF="${LDFLAGS} -L${PREFIX}/lib -lHYPRE -ljsonfortran -lhdf5hl_fortran -lhdf5_fortran -lhdf5_hl -lhdf5 -lz"
 
 # Build default binary
 make PREFIX="${PREFIX}" \
