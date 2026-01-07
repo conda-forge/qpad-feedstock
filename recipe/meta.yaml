@@ -1,7 +1,7 @@
 {% set name = "qpad" %}
 {% set version = "1.6.3" %}
 
-{% set build = 0 %}
+{% set build = 1 %}
 
 
 package:
@@ -22,10 +22,23 @@ build:
     - mkdir -p $PREFIX/lib
     - mkdir -p $PREFIX/include
     - mkdir -p bin
-    - make
+    - export FC="${FC}"
+    - export CC="${CC}"
+    - export PREFIX="${PREFIX}"
+    - make PREFIX="${PREFIX}" \
+        FC="${FC}" CC="${CC}" LINKER="${FC}" \
+        FC_OPTS="${FFLAGS} -fdefault-real-8 -fdefault-double-8 -fopenmp -ffree-form" \
+        CC_OPTS="${CFLAGS} -O -std=c99" \
+        LINKER_OPTS="${LDFLAGS} -fopenmp" \
+        LDF="-L${PREFIX}/lib -lHYPRE -ljsonfortran -lhdf5hl_fortran -lhdf5_fortran -lhdf5_hl -lhdf5 -lz"
     - cp ./bin/qpad.e $PREFIX/bin/
     - make clean
-    - make IF_OPENPMD=1
+    - make PREFIX="${PREFIX}" IF_OPENPMD=1 \
+        FC="${FC}" CC="${CC}" LINKER="${FC}" \
+        FC_OPTS="${FFLAGS} -fdefault-real-8 -fdefault-double-8 -fopenmp -ffree-form" \
+        CC_OPTS="${CFLAGS} -O -std=c99" \
+        LINKER_OPTS="${LDFLAGS} -fopenmp" \
+        LDF="-L${PREFIX}/lib -lHYPRE -ljsonfortran -lhdf5hl_fortran -lhdf5_fortran -lhdf5_hl -lhdf5 -lz"
     - cp ./bin/qpad.e $PREFIX/bin/qpad-pmd.e
     
 requirements:
