@@ -1,7 +1,7 @@
 {% set name = "qpad" %}
 {% set version = "1.6.3" %}
 
-{% set build = 0 %}
+{% set build = 1 %}
 
 
 package:
@@ -17,16 +17,7 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win]
-  script: 
-    - mkdir -p $PREFIX/bin
-    - mkdir -p $PREFIX/lib
-    - mkdir -p $PREFIX/include
-    - mkdir -p bin
-    - make
-    - cp ./bin/qpad.e $PREFIX/bin/
-    - make clean
-    - make IF_OPENPMD=1
-    - cp ./bin/qpad.e $PREFIX/bin/qpad-pmd.e
+  skip: true  # [osx and arm64 and mpi == "mpich"]
     
 requirements:
   build:
